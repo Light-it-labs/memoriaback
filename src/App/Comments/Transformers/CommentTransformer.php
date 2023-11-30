@@ -11,8 +11,8 @@ class CommentTransformer extends Transformer
 {
     public function transform(Comment $comment)
     {
-        $comment->load(['childComments', 'childComments.user']);
-
+        $comment->load(['comments']);
+        logger($comment->comments);
         return [
             'id' => $comment->id,
             'body' => $comment->body,
@@ -21,7 +21,7 @@ class CommentTransformer extends Transformer
                 'id' => $comment->user->id,
                 'name' => $comment->user->name,
             ],
-            'comments' => $comment->childComments->map(
+            'comments' => $comment->comments->map(
                 fn ($comment) => (new CommentTransformer())->transform($comment)
             )->toArray(),
         ];

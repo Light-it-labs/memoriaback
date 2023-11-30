@@ -13,7 +13,9 @@ class CreateChatController
     public function __invoke(Request $request, CreateChatAction $createChatAction)
     {
         $data = [
-            'name' => $request->input('name'),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'user_id' => $request->user()->id,
         ];
 
         $chat = $createChatAction($data);

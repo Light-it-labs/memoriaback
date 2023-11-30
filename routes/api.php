@@ -3,6 +3,9 @@
 use App\Chats\Controllers\CreateChatController;
 use App\Chats\Controllers\GetChatController;
 use App\Chats\Controllers\GetChatsController;
+use App\Comments\Controllers\CreateCommentController;
+use App\Comments\Controllers\GetCommentController;
+use App\Comments\Controllers\GetCommentsController;
 use App\Users\Controllers\DeleteUserController;
 use App\Users\Controllers\GetUserController;
 use App\Users\Controllers\ListUserController;
@@ -45,5 +48,11 @@ Route::post('/login', LoginController::class);
 Route::group(['prefix' => 'chats'], function () {
     Route::get('/', GetChatsController::class);
     Route::get('/{chat}', GetChatController::class);
-    Route::post('/', CreateChatController::class);
+    Route::post('/', CreateChatController::class)->middleware('auth:sanctum');
+});
+
+Route::group(['prefix' => 'comments'], function () {
+    Route::get('/', GetCommentsController::class);
+    Route::get('/{comment}', GetCommentController::class);
+    Route::post('/', CreateCommentController::class)->middleware('auth:sanctum');
 });

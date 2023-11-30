@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Domain\Chats\Models;
 
 use Domain\Comments\Models\Comment;
+use Domain\Users\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -23,6 +24,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $comments
  * @property-read int|null $comments_count
+ * @property string $description
+ * @property int $user_id
+ * @property-read User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereUserId($value)
+ * @property string $title
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereTitle($value)
  * @mixin \Eloquent
  */
 class Chat extends Model
@@ -32,5 +40,10 @@ class Chat extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -7,6 +7,7 @@ namespace Domain\Users\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Domain\Chats\Models\Chat;
+use Domain\Comments\Models\Comment;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -41,6 +42,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePuppeteerId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Chat> $chats
  * @property-read int|null $chats_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $comments
+ * @property-read int|null $comments_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -82,5 +85,10 @@ class User extends Authenticatable
     public function chats()
     {
         return $this->hasMany(Chat::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
