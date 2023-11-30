@@ -18,8 +18,8 @@ class StoreUserRequest extends FormRequest
     {
         return [
             self::NAME => ['required'],
-            self::EMAIL => ['required', 'email:strict'],
-            self::PASSWORD => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
+            self::EMAIL => ['required'],
+            self::PASSWORD => ['required'],
         ];
     }
 

@@ -3,6 +3,7 @@
 use App\Users\Controllers\DeleteUserController;
 use App\Users\Controllers\GetUserController;
 use App\Users\Controllers\ListUserController;
+use App\Users\Controllers\LoginController;
 use App\Users\Controllers\StoreUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,5 @@ Route::prefix('users')
         Route::post('/', StoreUserController::class);
         Route::delete('/{user}', DeleteUserController::class);
     });
+
+Route::post('/login', LoginController::class);

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('puppeteer_id');
+            $table->string('puppeteer_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
