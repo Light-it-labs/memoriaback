@@ -12,7 +12,7 @@ class CommentTransformer extends Transformer
     public function transform(Comment $comment)
     {
         $comment->load(['comments']);
-        logger($comment->comments);
+
         return [
             'id' => $comment->id,
             'body' => $comment->body,
@@ -24,6 +24,7 @@ class CommentTransformer extends Transformer
             'comments' => $comment->comments->map(
                 fn ($comment) => (new CommentTransformer())->transform($comment)
             )->toArray(),
+            'created_at' => $comment->created_at->toDateTimeString(),
         ];
     }
 }
