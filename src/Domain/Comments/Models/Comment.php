@@ -30,6 +30,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUserId($value)
  * @property-read Chat $chat
  * @property-read User $user
+ * @property int|null $parent_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $childComments
+ * @property-read int|null $child_comments_count
+ * @property-read Comment|null $parentComment
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment approved()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereParentId($value)
  * @mixin \Eloquent
  */
 class Comment extends Model
@@ -44,5 +50,20 @@ class Comment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('status', 'approved');
+    }
+
+    public function parentComment()
+    {
+        return $this->belongsTo(Comment::class, 'parent_id');
+    }
+
+    public function childComments()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
     }
 }

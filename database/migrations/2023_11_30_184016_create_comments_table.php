@@ -14,9 +14,10 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('chat_id')->constrained();
+            $table->foreignId('chat_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained();
             $table->text('body');
+            $table->foreignId('parent_id')->nullable()->constrained('comments');
             $table->string('status')->default(CommentStatuses::PENDING->value);
             $table->timestamps();
         });

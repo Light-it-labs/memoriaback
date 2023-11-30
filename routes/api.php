@@ -1,5 +1,6 @@
 <?php
 
+use App\Chats\Controllers\CreateChatController;
 use App\Users\Controllers\DeleteUserController;
 use App\Users\Controllers\GetUserController;
 use App\Users\Controllers\ListUserController;
@@ -38,3 +39,11 @@ Route::prefix('users')
     });
 
 Route::post('/login', LoginController::class);
+
+Route::group(['prefix' => 'chats'], function () {
+    // Route::get('/', 'ChatController@index');
+    // Route::get('/{chat}', 'ChatController@show');
+    Route::post('/', CreateChatController::class);
+    // Route::put('/{chat}', 'ChatController@update');
+    // Route::delete('/{chat}', 'ChatController@destroy');
+});
