@@ -1,0 +1,48 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Domain\Comments\Models;
+
+use Domain\Chats\Models\Chat;
+use Domain\Users\Models\User;
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * Domain\Comments\Models\Comment
+ *
+ * @property int $id
+ * @property int $chat_id
+ * @property int $user_id
+ * @property string $body
+ * @property string $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereChatId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUserId($value)
+ * @property-read Chat $chat
+ * @property-read User $user
+ * @mixin \Eloquent
+ */
+class Comment extends Model
+{
+    protected $guarded = [];
+
+    public function chat()
+    {
+        return $this->belongsTo(Chat::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
