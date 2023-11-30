@@ -11,6 +11,8 @@ class CommentTransformer extends Transformer
 {
     public function transform(Comment $comment)
     {
+        $comment->load(['childComments', 'childComments.user']);
+
         return [
             'id' => $comment->id,
             'body' => $comment->body,
