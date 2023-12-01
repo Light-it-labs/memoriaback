@@ -11,6 +11,7 @@ use App\Users\Controllers\GetUserController;
 use App\Users\Controllers\ListUserController;
 use App\Users\Controllers\LoginController;
 use App\Users\Controllers\StoreUserController;
+use App\Users\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -56,3 +57,7 @@ Route::group(['prefix' => 'comments'], function () {
     Route::get('/{comment}', GetCommentController::class);
     Route::post('/', CreateCommentController::class)->middleware('auth:sanctum');
 });
+
+Route::get('/user', function (Request $request) {
+    return responder()->success($request->user(), UserTransformer::class)->respond();
+})->middleware('auth:sanctum');
