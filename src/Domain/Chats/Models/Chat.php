@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereUserId($value)
  * @property string $title
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereTitle($value)
+ * @property string|null $puppeteer_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat wherePuppeteerId($value)
  * @mixin \Eloquent
  */
 class Chat extends Model

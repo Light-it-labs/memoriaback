@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Comments\Models;
 
+use App\Scopes\ApprovedScope;
 use Domain\Chats\Models\Chat;
 use Domain\Users\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +37,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read Comment|null $parentComment
  * @method static \Illuminate\Database\Eloquent\Builder|Comment approved()
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereParentId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $comments
+ * @property-read int|null $comments_count
  * @mixin \Eloquent
  */
 class Comment extends Model
@@ -65,5 +68,10 @@ class Comment extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class, 'parent_id');
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new ApprovedScope);
     }
 }
